@@ -1,4 +1,4 @@
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LinkIcon, BarChart2, ShieldCheck, Zap, Globe, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -86,11 +86,6 @@ export default function Home() {
               Get started for free
             </Button>
           </SignUpButton>
-          <SignInButton mode="modal">
-            <Button variant="outline" size="lg" className="px-8">
-              Sign in
-            </Button>
-          </SignInButton>
         </div>
       </section>
 
