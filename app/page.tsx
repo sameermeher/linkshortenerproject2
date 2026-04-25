@@ -71,7 +71,7 @@ export default function Home() {
         </div>
 
         <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-foreground sm:text-6xl">
-          Shorten, Share &amp;{" "}
+          Shorten, Share &{" "}
           <span className="text-primary">Track</span> your links
         </h1>
 
