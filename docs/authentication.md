@@ -28,10 +28,14 @@ No `NEXT_PUBLIC_CLERK_SIGN_IN_URL` or `NEXT_PUBLIC_CLERK_SIGN_UP_URL` should poi
 
 ## Middleware Setup
 
-Create `middleware.ts` at the **project root** (same level as `app/`). Use `clerkMiddleware` with `createRouteMatcher` to protect `/dashboard` and all its sub-routes.
+> **CRITICAL — `middleware.ts` is DEPRECATED in this project.**
+> The version of Next.js used here does **not** support `middleware.ts`. **Never create or modify `middleware.ts`.**
+> All Clerk route protection and redirect logic lives in **`proxy.ts`** at the project root. Treat `proxy.ts` exactly as you would `middleware.ts` in older Next.js projects.
+
+Edit `proxy.ts` at the **project root** (same level as `app/`). Use `clerkMiddleware` with `createRouteMatcher` to protect `/dashboard` and all its sub-routes.
 
 ```ts
-// middleware.ts
+// proxy.ts
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
@@ -155,7 +159,7 @@ Use `currentUser()` only when you need the full user profile object (name, email
 
 | File | Purpose |
 |---|---|
-| `middleware.ts` (project root) | Clerk middleware — route protection and homepage redirect |
+| `proxy.ts` (project root) | Clerk middleware — route protection and homepage redirect. **Never use `middleware.ts`** — it is deprecated in this version of Next.js. |
 | `app/layout.tsx` | Wraps the app in `<ClerkProvider>` |
 
 `<ClerkProvider>` must wrap the entire application in `app/layout.tsx`. It is already present — do not remove or move it.
@@ -167,5 +171,6 @@ Use `currentUser()` only when you need the full user profile object (name, email
 - Do not create `app/sign-in/[[...sign-in]]/page.tsx` or `app/sign-up/[[...sign-up]]/page.tsx` catch-all pages.
 - Do not set `NEXT_PUBLIC_CLERK_SIGN_IN_URL` or `NEXT_PUBLIC_CLERK_SIGN_UP_URL` to custom routes.
 - Do not use `<SignIn>` or `<SignUp>` components as page-level components.
-- Do not protect routes using `if (!session)` checks in individual page components — use middleware.
+- Do not protect routes using `if (!session)` checks in individual page components — use `proxy.ts`.
+- Do not create or modify `middleware.ts` — it is **deprecated** in this version of Next.js. All middleware logic belongs in `proxy.ts`.
 - Do not call `clerkClient` for authentication decisions; it is for user management only.

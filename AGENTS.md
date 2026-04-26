@@ -59,7 +59,11 @@ lib/
 docs/                 Coding standards (this directory)
 drizzle/              Generated SQL migrations (do not edit)
 drizzle.config.ts     Drizzle Kit config
+proxy.ts              Clerk middleware (replaces middleware.ts — see below)
 ```
+
+> **IMPORTANT — `middleware.ts` is DEPRECATED in this project.**
+> The version of Next.js used here does **not** support `middleware.ts`. **Never create or modify `middleware.ts`.** All Clerk route protection and redirect logic lives in **`proxy.ts`** at the project root. Treat `proxy.ts` exactly as you would `middleware.ts` in older Next.js projects.
 
 ---
 
